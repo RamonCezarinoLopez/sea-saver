@@ -1,8 +1,8 @@
-package controller;
+package br.com.seasaver.aplication.controller;
 
 
-import model.User;
-import service.UserService;
+import br.com.seasaver.aplication.model.User;
+import br.com.seasaver.aplication.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -18,24 +18,24 @@ public class UserController {
 
     @GetMapping
     public List<User> getAllUsers() {
-        return userService.getAllUsers();
+        return userService.getAllUsurious();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
-        return userService.getUserById(id)
+        return userService.getUsuriousById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
     public User createUser(@Validated @RequestBody User user) {
-        return userService.createUser(user);
+        return userService.createUsuario(user);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @Validated @RequestBody User userDetails) {
-        return ResponseEntity.ok(userService.updateUser(id, userDetails));
+        return ResponseEntity.ok(userService.updateUsuario(id, userDetails));
     }
 
     @DeleteMapping("/{id}")
@@ -45,4 +45,4 @@ public class UserController {
     }
 }
 
-}
+

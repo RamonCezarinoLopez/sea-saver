@@ -1,6 +1,6 @@
-package repository;
+package br.com.seasaver.aplication.repository;
 
-import model.Admin;
+import br.com.seasaver.aplication.model.Admin;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

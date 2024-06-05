@@ -1,4 +1,4 @@
-package model;
+package br.com.seasaver.aplication.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
@@ -29,8 +29,7 @@ public class User {
     @NotBlank
     private String localizacao;
 
-    @OneToMany(mappedBy = "usuario")
-    private List<String> historicoDenuncias;
+
 }
 
 

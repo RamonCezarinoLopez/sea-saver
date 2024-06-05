@@ -1,11 +1,17 @@
-package model;
+package br.com.seasaver.aplication.model;
+
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Entity
-public class Admin {
+
+public class ONG {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,6 +27,10 @@ public class Admin {
     private String senha;
 
     @NotBlank
-    private String cargo;
-}
+    private String localizacao;
 
+    private String descricao;
+
+    @ElementCollection
+    private List<String> areasAtuacao;
+}

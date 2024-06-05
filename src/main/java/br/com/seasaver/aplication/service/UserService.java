@@ -1,6 +1,6 @@
-package service;
-import model.User;
-import repository.UserRepository;
+package br.com.seasaver.aplication.service;
+import br.com.seasaver.aplication.model.User;
+import br.com.seasaver.aplication.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,30 +13,30 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<User> getAllUsuarios() {
+    public List<User> getAllUsurious() {
         return userRepository.findAll();
     }
 
-    public Optional<User> getUsuarioById(Long id) {
-        return UserRepository.findById(id);
+    public Optional<User> getUsuriousById(Long id) {
+        return userRepository.findById(id);
     }
 
-    public User createUsuario(User usuario) {
-        return UserRepository.save(usuario);
+    public User createUsuario(User user) {
+        return userRepository.save(user);
     }
 
     public User updateUsuario(Long id, User usuarioDetails) {
-        User usuario = UserRepository.findById(id).orElseThrow();
+        User usuario = userRepository.findById(id).orElseThrow();
         usuario.setCpf(usuarioDetails.getCpf());
         usuario.setNome(usuarioDetails.getNome());
         usuario.setEmail(usuarioDetails.getEmail());
         usuario.setSenha(usuarioDetails.getSenha());
         usuario.setLocalizacao(usuarioDetails.getLocalizacao());
-        return UserRepository.save(usuario);
+        return userRepository.save(usuario);
     }
 
     public void deleteUser(Long id) {
-        UserRepository.deleteById(id);
+        userRepository.deleteById(id);
     }
 }
 
