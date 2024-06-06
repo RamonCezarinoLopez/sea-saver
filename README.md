@@ -205,6 +205,8 @@ import io.swagger.v3.oas.annotations.servers.Server;
 )
 public class OpenAPIConfig {
 }
+
+
 Funcionalidades
 Monitoramento e Reporte de Poluição Marinha
 Captura de Imagens e Localização
