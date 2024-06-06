@@ -5,7 +5,11 @@ Estrutura do Projeto
 Pacotes e Classes
 1. controller
 ReportController: Controlador REST para gerenciar operações relacionadas a relatórios de poluição. Inclui endpoints para criação, atualização, exclusão e listagem de relatórios.
+
+java
+Copiar código
 package br.com.seasaver.aplication.controller;
+
 import br.com.seasaver.aplication.model.Report;
 import br.com.seasaver.aplication.repository.ReportRepository;
 import jakarta.validation.Valid;
@@ -13,9 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.Optional;
-
 
 @RestController
 @RequestMapping("/api/reports")
@@ -45,6 +49,7 @@ public class ReportController {
         return ResponseEntity.status(HttpStatus.CREATED).body(savedReport);
     }
 
+    @PutMapping("/{id}")
     public ResponseEntity<Report> updateReport(@PathVariable Long id, @Valid @RequestBody Report reportDetails) {
         return reportRepository.findById(id).map(report -> {
             report.setDescription(reportDetails.getDescription());
@@ -57,7 +62,6 @@ public class ReportController {
         }).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteReport(@PathVariable Long id) {
         if (reportRepository.existsById(id)) {
@@ -67,23 +71,17 @@ public class ReportController {
             return ResponseEntity.notFound().build();
         }
     }
-    }
-
-
-
+}
 2. model
 User: Entidade representando os usuários do aplicativo, com atributos como CPF, nome, e-mail, senha e localização.
-Admin: Entidade representando administradores do sistema, com atributos específicos para gerenciamento.
-ONG: Entidade representando organizações não governamentais que receberão relatórios de poluição e interagirão com o sistema.
-Notification: Entidade representando notificações enviadas para ONGs e outros usuários.
-Partnership: Entidade representando parcerias com ONGs para doações e patrocínios.
-Report: Entidade representando relatórios de poluição enviados pelos usuários, incluindo título, descrição, localização e imagens.
+
+java
+Copiar código
 package br.com.seasaver.aplication.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
-
 import java.util.List;
 
 @Data
@@ -115,18 +113,34 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Notification> notifications;
-
-
 }
+Admin: Entidade representando administradores do sistema, com atributos específicos para gerenciamento.
+
+ONG: Entidade representando organizações não governamentais que receberão relatórios de poluição e interagirão com o sistema.
+
+Notification: Entidade representando notificações enviadas para ONGs e outros usuários.
+
+Partnership: Entidade representando parcerias com ONGs para doações e patrocínios.
+
+Report: Entidade representando relatórios de poluição enviados pelos usuários, incluindo título, descrição, localização e imagens.
+
 3. repository
 AdminRepository: Interface para operações de persistência relacionadas a administradores.
+
 AdvertisementRepository: Interface para operações de persistência relacionadas a anúncios publicitários.
+
 NotificationRepository: Interface para operações de persistência relacionadas a notificações.
+
 OngRepository: Interface para operações de persistência relacionadas a ONGs.
+
 PartnershipRepository: Interface para operações de persistência relacionadas a parcerias.
+
 ReportRepository: Interface para operações de persistência relacionadas a relatórios de poluição.
+
 UserRepository: Interface para operações de persistência relacionadas a usuários.
+
 java
+Copiar código
 package br.com.seasaver.aplication.repository;
 
 import br.com.seasaver.aplication.model.Report;
@@ -136,7 +150,11 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
 }
 4. service
 UserService: Serviço responsável pela lógica de negócios relacionada aos usuários.
+
+java
+Copiar código
 package br.com.seasaver.aplication.service;
+
 import br.com.seasaver.aplication.model.User;
 import br.com.seasaver.aplication.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -177,11 +195,13 @@ public class UserService {
         userRepository.deleteById(id);
     }
 }
-
 5. openapi
 OpenAPIConfig: Configuração do Swagger para documentação da API.
 
+java
+Copiar código
 package br.com.seasaver.aplication.openapi;
+
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
@@ -205,8 +225,6 @@ import io.swagger.v3.oas.annotations.servers.Server;
 )
 public class OpenAPIConfig {
 }
-
-
 Funcionalidades
 Monitoramento e Reporte de Poluição Marinha
 Captura de Imagens e Localização
@@ -222,4 +240,10 @@ Análise de Dados
 Monetização e Sustentabilidade do Aplicativo
 Publicidade no Aplicativo
 Parcerias com ONGs
+Esse README fornece uma visão geral das classes e pacotes presentes no projeto "Sea Saver", além de descrever as principais funcionalidades que o aplicativo oferece.
+
+
+
+
+
 
