@@ -36,6 +36,5 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Notification> notifications;
 
-    @OneToMany(mappedBy = "user")
-    private List<Donation> donations;
+
 }
